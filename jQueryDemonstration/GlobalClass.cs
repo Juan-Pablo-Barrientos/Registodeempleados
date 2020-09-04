@@ -22,6 +22,5 @@ namespace jQueryDemonstration
                 return sw.GetStringBuilder().ToString();
             }
         }
-
     }
 }

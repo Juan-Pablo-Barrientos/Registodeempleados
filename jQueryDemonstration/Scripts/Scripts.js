@@ -1,4 +1,25 @@
-﻿$(function () {
+﻿function Delete(url) {
+    if (confirm('Esta seguro de borrar este registro ?') == true) {
+    $.ajax({
+            type: 'POST',
+            url: url,
+            success: function (response) {
+                if (response.success) {
+                    $("#firstTab").html(response.html);
+                    $.notify(response.message, "warn");
+                    if (typeof activatejQueryTable !== 'undefined' && $.isFunction(activatejQueryTable))
+                        activatejQueryTable();
+                }
+                else {
+                    $.notify(response.message, "error");
+                }
+            }
+
+        });
+    }
+}
+
+$(function () {
     $("#loaderbody").addClass('hide');
     $(document).bind('ajaxStart', function () {
         $("#loaderbody").removeClass('hide');
@@ -16,6 +37,37 @@ function ShowImagePreview(imageUploader, previewImage) {
         reader.readAsDataURL(imageUploader.files[0]);
     }
 }
+
+$("#custom-switch").change(function () {
+    $(".dataTables_wrapper").toggle();
+});
+
+$("#custom-switch2").change(function () {
+    $("body").toggleClass("dark-mode");
+    $(".wrapper").toggleClass("dark-mode");
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function jQueryAjaxPost(form) {
     $.validator.unobtrusive.parse(form);
@@ -56,7 +108,7 @@ function refreshAddNewTab(resetUrl, showViewTab) {
         url: resetUrl,
         success: function (response) {
             $("#secondTab").html(response);
-            $('ul.nav.nav-tabs a:eq(1)').html('Add New');
+            $('ul.nav.nav-tabs a:eq(1)').html('Añadir Nuevo');
             if (showViewTab)
                 $('ul.nav.nav-tabs a:eq(0)').tab('show');
         }
@@ -69,30 +121,8 @@ function Edit(url) {
         url: url,
         success: function (response) {
             $("#secondTab").html(response);
-            $('ul.nav.nav-tabs a:eq(1)').html('Edit');
+            $('ul.nav.nav-tabs a:eq(1)').html('Editar');
             $('ul.nav.nav-tabs a:eq(1)').tab('show');
         }
     });
-
-}
-
-function Delete(url) {
-    if (confirm('Are you sure to delete this record ?') == true) {
-    $.ajax({
-            type: 'POST',
-            url: url,
-            success: function (response) {
-                if (response.success) {
-                    $("#firstTab").html(response.html);
-                    $.notify(response.message, "warn");
-                    if (typeof activatejQueryTable !== 'undefined' && $.isFunction(activatejQueryTable))
-                        activatejQueryTable();
-                }
-                else {
-                    $.notify(response.message, "error");
-                }
-            }
-
-        });
-    }
 }

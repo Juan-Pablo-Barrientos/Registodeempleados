@@ -68,7 +68,7 @@ namespace jQueryDemonstration.Controllers
                         db.SaveChanges();
                     }
                 }
-                return Json(new { success = true, html = GlobalClass.RenderRazorViewToString(this, "ViewAll", GetAllEmployee()), message = "Submitted Successfully" }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = true, html = GlobalClass.RenderRazorViewToString(this, "ViewAll", GetAllEmployee()), message = "Enviado con Exito!" }, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception ex)
@@ -87,7 +87,7 @@ namespace jQueryDemonstration.Controllers
                     db.Employees.Remove(emp);
                     db.SaveChanges();
                 }
-                return Json(new { success = true, html = GlobalClass.RenderRazorViewToString(this, "ViewAll", GetAllEmployee()), message = "Deleted Successfully" }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = true, html = GlobalClass.RenderRazorViewToString(this, "ViewAll", GetAllEmployee()), message = "Eliminado con exito!" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
